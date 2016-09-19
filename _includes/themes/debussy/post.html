@@ -1,0 +1,28 @@
+<div id="black-box">
+    <a class="home" href="{{ HOME_PATH }}">Debussy</a></br>    
+    <a  href="/archive.html">News</a></br>
+    <a href="{{ page.previous.url }}">&larr;</a> <a href="#">⇡</a> <a href="{{ page.next.url }}">&rarr;</a> 
+  </div>
+
+  <div id="page">
+    
+    <div class='signature'>
+      <span class="date-abr">
+    	{{page.date |date_to_string }}
+      </span>
+    </div>
+
+  <h1 class="emphnext">{{ page.title }}</h1>
+
+  <ul class="tag_box inline">
+  {% assign tags_list = page.tags %}
+  {% include JB/tags_list %}
+  </ul>
+
+  {{ content }}
+
+</div>
+
+{% include JB/comments %}
+
+

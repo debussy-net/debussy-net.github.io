@@ -1,0 +1,13 @@
+<div class="fullpost">
+  <div class="postdate">{{ post.date | date_to_string }}</div>
+  <h3 class="blogtitle"><a href="{{ post.url }}">{{ post.title | xml_escape }}</a></h3>
+  <div class="blogsummary">
+  {{post.content}}
+  </div>
+  <div class="blogfooter">
+    Categories: {% for category in post.categories %}{% if category == post.categories.last and category != post.categories.first %} and {% elsif category != post.categories.first %}, {% endif %}{{ category }}{% endfor %} 
+  </div>
+  {% if post != site.posts.last %}
+  <hr>
+  {% endif %}
+</div>

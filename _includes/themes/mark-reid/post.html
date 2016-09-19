@@ -1,0 +1,67 @@
+<div id="black-box">
+    <a class="home" href="{{ HOME_PATH }}">鵝<!-- &#x27F0; --></a></br>    
+    <a  href="/pages/archive.html">歷<!-- &#x32AA; --></a></br>
+    <a href="/search.html">☌</a><br><!-- <br> -->
+    <a href="{{ page.previous.url }}">&larr;<!-- &#x27F5; --></a><br><!-- <br> -->
+    <a href="{{ page.next.url }}">&rarr;<!-- &#x27F6; --></a> <br>
+    <a href="#">⇡</a>
+  </div>
+
+  <div id="page">
+    
+    <div class='signature'>
+      <span class="date-abr">
+    	{{page.date |date_to_string }}
+      </span>
+    </div>
+
+  <h1 class="emphnext">{{ page.title }}</h1>
+
+  <ul class="tag_box inline">
+  {% assign tags_list = page.tags %}
+  {% include JB/tags_list %}
+  </ul>
+
+  {{ content }}
+
+</div>
+
+<script src="/js/search.min.js" type="text/javascript" charset="utf-8"></script>
+<br>
+<div id="search">
+  <form action="/search" method="get">
+    <input type="text" id="search-query" name="q" placeholder="keyword" autocomplete="on">
+  </form>
+</div>
+
+<section id="search-results" style="display: inline; line-height: 1.5em;">
+  <div class="entries">
+  </div>
+</section>
+
+{% raw %}
+<script id="search-results-template" type="text/mustache">
+  {{#entries}}
+    <p style="margin: 0em 0 0em 0; list-style: none; overflow: hidden;">
+        {{#date}}<small><gray datetime="{{pubdate}}" pubdate>{{displaydate}}</gray></small>{{/date}}
+        <a href="{{url}}" style="font-size:80%;">{{title}}</a>
+    </p>
+  {{/entries}}
+</script>
+{% endraw %}
+
+<script type="text/javascript">
+  $(function() {
+    $('#search-query').lunrSearch({
+      indexUrl: '/js/index.json',   // Url for the .json file containing search index data
+      results : '#search-results',  // selector for containing search results element
+      entries : '.entries',         // selector for search entries containing element (contained within results above)
+      template: '#search-results-template'  // selector for Mustache.js template
+    });
+  });
+</script>
+
+
+{% include JB/comments %}
+
+
